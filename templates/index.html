@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Utils</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        #text {
+            width: 90%;
+            height: 200px;
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #charCount {
+            font-size: 24px;
+            color: #ff6347;
+            font-weight: bold;
+            transition: transform 0.3s ease-in-out;
+        }
+        #charCount:hover {
+            transform: scale(1.1);
+        }
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .checkbox-container input[type="checkbox"] {
+            display: none;
+        }
+        .checkbox-container label {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .checkbox-container input[type="checkbox"]:checked + label {
+            background-color: #001b38;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome to the text analyzer. Enter your text below</h1>
+
+<form action='/analyze' method='post'> {% csrf_token %}
+    <textarea id='text' name='text' style='margin: 0px; width: 1316px; height: 478px;'></textarea><br>
+    <span id='charCount'>Character Count: 0</span><br>
+
+    <div class="checkbox-container">
+        <input type="checkbox" id="removepunc" name="removepunc">
+        <label for="removepunc">Remove Punctuations</label>
+        
+        <input type="checkbox" id="fullcaps" name="fullcaps">
+        <label for="fullcaps">Capitalize Your Text</label>
+        
+        <input type="checkbox" id="extraspaceremover" name="extraspaceremover">
+        <label for="extraspaceremover">Remove Extra Space</label>
+    </div>
+    
+    <button type='submit'>Analyze Text</button>
+</form>
+
+<script>
+    document.getElementById('text').addEventListener('input', function () {
+        const text = this.value;
+        const charCount = text.length;
+        document.getElementById('charCount').textContent = 'Character Count: ' + charCount;
+    });
+</script>
+
+</body>
+</html>
